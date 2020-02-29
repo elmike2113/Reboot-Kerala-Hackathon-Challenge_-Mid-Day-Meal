@@ -34,17 +34,41 @@ def foodmenu():
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
-
+#student form class
 class RegisterForm(Form):
-    name = StringField('Name', [validators.Length(min=1, max=50)])
-    username = StringField('Username', [validators.Length(min=4, max=25)])
-    email = StringField('Email', [validators.Length(min=6, max=50)])
+    sname = StringField('sname', [validators.Length(min=1, max=50)])
+    scode = StringField('scode', [validators.Length(min=4, max=25)])
+    semail = StringField('Email', [validators.Length(min=1, max=60)])
     password = PasswordField('Password', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
+    
+    rpassword = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords do not match')
+    ])
+    district=StringField('sname', [validators.Length(min=1, max=50)])
+    dcoord=StringField('sname', [validators.Length(min=1, max=50)])
     confirm = PasswordField('Confirm Password')
-
+#health official form class
+class RegisterForm(Form):
+    hname = StringField('sname', [validators.Length(min=1, max=50)])
+    hcode = StringField('scode', [validators.Length(min=4, max=25)])
+    hemail = StringField('Email', [validators.Length(min=1, max=60)])
+    hpassword = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords do not match')
+    ])
+    
+    hrpassword = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords do not match')
+    ])
+    hdistrict=StringField('sname', [validators.Length(min=1, max=50)])
+    hcoord=StringField('sname', [validators.Length(min=1, max=50)])
+    confirm = PasswordField('Confirm Password')
+    
 # User Register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
