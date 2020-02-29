@@ -4,9 +4,9 @@
 <title>main</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="home.css">
-<link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="register.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='home.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='register.css') }}">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,19 +20,19 @@
     
       <div style="background-color: khaki;">
      <div class="w3-hide-small menu " height=200px width=100%>
-               <img src="logo.png"  width=100% height=200px>
+               <img src="{{ url_for('static',filename='logo.png') }}"  width=100% height=200px>
     </div>
     
 <div class="topnav">
-  <a href="main.html">Home</a>
-  <a href="foodinfo.html">Food Info</a>
-    <a href="foodmenu.html">Food Menu</a>
-  <a href="contact.html">Contact</a>
-    <a class="active" href="register.html">Register</a>
+  <a href="/">Home</a>
+  <a href="/foodinfo">Food Info</a>
+    <a href="/foodmenu">Food Menu</a>
+  <a href="/contact">Contact</a>
+    <a class="active" href="/register">Register</a>
   <div class="login-container">
-    <form action="/action_page.php">
-        <input type="text" placeholder="Username"  name="username">
-        <input type="password" placeholder="Password" name="psw">
+    <form action="/register">
+        <input type="text" placeholder="Username"  name="sname">
+        <input type="password" placeholder="Password" name="password">
      <button type="submit">Login</button>
       
       </form>
@@ -48,35 +48,35 @@
     <p>Please fill in this form to create an account.</p>
     <hr>
        <label for="name"><b>SCHOOL NAME:</b></label>
-    <input type="text" placeholder="Enter School Name" name="name" required>
+    <input type="text" placeholder="Enter School Name" name="sname" required>
 
        <label for="code"><b>SCHOOL CODE:</b></label>
-    <input type="text" placeholder="Enter School Code" name="code" required>
+    <input type="text" placeholder="Enter School Code" name="scode" required>
 
     <label for="email"><b>EMAIL:</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Email" name="semail" required>
 
     <label for="psw"><b>PASSWORD:</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="password" required>
 
     <label for="psw-repeat"><b>CONFIRM PASSWORD:</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <input type="password" placeholder="Repeat Password" name="rpassword" required>
          
     <label for="code"><b>DISTRICT:</b></label>
     <input type="text" placeholder="Enter District" name="district" required>
       
     <label for="code"><b>MDM COORDINATOR:</b></label>
-    <input type="text" placeholder="MDM Coordinator" name="dist-cordinator" required>
+    <input type="text" placeholder="MDM Coordinator" name="doord" required>
       
       <label for="code"><b>PHONE NO:</b></label>
-    <input type="text" placeholder="Enter Phone No of district coordinator" name="cordinator-no" required>
+    <input type="number" placeholder="Enter Phone No of district coordinator" name="dcoordnum" required>
       
     <label for="code"><b>TOTAL NO OF STUDENTS:</b></label>
-    <input type="text" placeholder="Enter Total Students" name="totalstd" required>
+    <input type="numbert" placeholder="Enter Total Students" name="totalstd" required>
       
             
     <label for="code"><b>NUMBER OF STUDENTS TAKING MDM</b></label>
-    <input type="text" placeholder="Enter Number of students taking MDM" name="noofmdm" required>
+    <input type="number" placeholder="Enter Number of students taking MDM" name="noofmdm" required>
     <hr>
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
