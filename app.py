@@ -17,23 +17,28 @@ app.config['MYSQL_PASSWORD'] = 'gh5472*1999'
 app.config['MYSQL_DB'] = 'flaskapp'
 
 mysql = MySQL(app)
-#class LanguageForm(Form):
-#    language = SelectMultipleField(u'Programming Language', choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
 
+#home page
 @app.route('/')
 def main():
     return render_template("main.html")
+
+#food info for public
 @app.route('/foodinfo')
 def foodinfo():
     return render_template("foodinfo.html")
 
+#food menu by health officials
 @app.route('/foodmenu')
 def foodmenu():
     return render_template("foodmenu.html")
 
+#contact pending
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
+
+
 #student form class
 class RegisterForm(Form):
     sname = StringField('sname', [validators.Length(min=1, max=50)])
@@ -51,6 +56,7 @@ class RegisterForm(Form):
     district=StringField('district', [validators.Length(min=1, max=50)])
     dcoord=StringField('dcoord', [validators.Length(min=1, max=50)])
     confirm = PasswordField('Confirm Password')
+    
 #health official form class
 class RegisterForm(Form):
     hname = StringField('hname', [validators.Length(min=1, max=50)])
@@ -68,6 +74,7 @@ class RegisterForm(Form):
     hdistrict=StringField('hdistrict', [validators.Length(min=1, max=50)])
     hcoord=StringField('hcoord', [validators.Length(min=1, max=50)])
     confirm = PasswordField('Confirm Password')
+    
     
 # User Register
 @app.route('/register', methods=['GET', 'POST'])
@@ -102,6 +109,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
+
 # health registration pending
 @app.route('/hregister', methods=['GET', 'POST'])
 def register():
@@ -133,7 +141,8 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
- #User login
+
+ #student login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -168,6 +177,7 @@ def login():
             return render_template('login.html', error=error)
 
     return render_template('login.html')
+
 
 #check if health official is logged in 
 @app.route('/rlogin', methods=['GET', 'POST'])
@@ -206,7 +216,7 @@ def login():
     return render_template('login.html')
 
 
-# Check if school is logged in
+# Check if school is logged in or not
 def is_logged_in(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -236,6 +246,7 @@ def logout():
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
 
+#run
 if __name__== '__main__':
     app.secret_key = "^A%DJAJU^JJ1231"
     app.run(host="0.0.0.0",port='8000',debug=True)
