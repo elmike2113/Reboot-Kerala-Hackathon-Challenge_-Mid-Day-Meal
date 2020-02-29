@@ -38,46 +38,52 @@ def contact():
 class RegisterForm(Form):
     sname = StringField('sname', [validators.Length(min=1, max=50)])
     scode = StringField('scode', [validators.Length(min=4, max=25)])
-    semail = StringField('Email', [validators.Length(min=1, max=60)])
-    password = PasswordField('Password', [
+    semail = StringField('semail', [validators.Length(min=1, max=60)])
+    password = PasswordField('password', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
     
-    rpassword = PasswordField('Password', [
+    rpassword = PasswordField('rassword', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
-    district=StringField('sname', [validators.Length(min=1, max=50)])
-    dcoord=StringField('sname', [validators.Length(min=1, max=50)])
+    district=StringField('district', [validators.Length(min=1, max=50)])
+    dcoord=StringField('dcoord', [validators.Length(min=1, max=50)])
     confirm = PasswordField('Confirm Password')
 #health official form class
 class RegisterForm(Form):
-    hname = StringField('sname', [validators.Length(min=1, max=50)])
-    hcode = StringField('scode', [validators.Length(min=4, max=25)])
-    hemail = StringField('Email', [validators.Length(min=1, max=60)])
-    hpassword = PasswordField('Password', [
+    hname = StringField('hname', [validators.Length(min=1, max=50)])
+    hcode = StringField('hcode', [validators.Length(min=4, max=25)])
+    hemail = StringField('hemail', [validators.Length(min=1, max=60)])
+    hpassword = PasswordField('hpassword', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
     
-    hrpassword = PasswordField('Password', [
+    hrpassword = PasswordField('hrpassword', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
-    hdistrict=StringField('sname', [validators.Length(min=1, max=50)])
-    hcoord=StringField('sname', [validators.Length(min=1, max=50)])
+    hdistrict=StringField('hdistrict', [validators.Length(min=1, max=50)])
+    hcoord=StringField('hcoord', [validators.Length(min=1, max=50)])
     confirm = PasswordField('Confirm Password')
     
 # User Register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
+    formm=request.form
     if request.method == 'POST' and form.validate():
-        name = form.name.data
-        email = form.email.data
-        username = form.username.data
-        password = form.password.data
+        sname = form.sname.data
+        scode = form.scode.data
+        semail = form.semail.data
+        password =form.password.data
+        rpassword=form.rpassword.data
+        district=form.district.data
+        dcoord=form.dcoord.data
+        totalstud=formm['totalstud']
+        noofmdm=formm['noofmdm']
 
         # Create cursor
         cur = mysql.connection.cursor()
@@ -100,11 +106,15 @@ def register():
 @app.route('/hregister', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
+    formms=request.form
     if request.method == 'POST' and form.validate():
-        name = form.name.data
-        email = form.email.data
-        username = form.username.data
-        password = form.password.data
+        hname = form.hname.data
+        hcode=form.hcode.data
+        hemail = form.hemail.data
+        hpassword = form.hpassword.data
+        hrpassword = form.hrpassword.data
+        hdistrict=form.hdistrict.data
+        hcoord=form.hcoord.data
 
         # Create cursor
         cur = mysql.connection.cursor()
