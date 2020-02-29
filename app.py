@@ -9,34 +9,16 @@ from wtforms import Form, SelectMultipleField
 from string import Template
 
 
-HTML_TEMPLATE = Template("""
-<h1>Hello ${place_name}!</h1>
-
-<img src="https://maps.googleapis.com/maps/api/staticmap?size=700x300&markers=${place_name}" alt="map of ${place_name}">
-
-<img src="https://maps.googleapis.com/maps/api/streetview?size=700x300&location=${place_name}" alt="street view of ${place_name}">
-""")
-
-
 app = Flask(__name__)
 
-db= yaml.load(open('db.yaml'),Loader=yaml.FullLoader)
-app.config['MYSQL-HOST']=db['mysql_host']
-app.config['MYSQL_USER']=db['mysql_user']
-app.config['MYSQL_PASSWORD']=db['mysql_password']
-app.config['MYSQL_DB']=db['mysql_db']
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'gh5472*1999'
+app.config['MYSQL_DB'] = 'flaskapp'
 
+mysql = MySQL(app)
 #class LanguageForm(Form):
 #    language = SelectMultipleField(u'Programming Language', choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
-
-def connection():
-    conn = MySQLdb.connect(host= 'localhost',
-                           user = 'root',
-                           passwd = 'gh5472*1999',
-                           db = 'flaskapp')
-    c = conn.cursor()
-    return c, conn
-mysql = MySQL(app)
 
 @app.route('/main')
 def main():
@@ -53,95 +35,98 @@ def foodmenu():
 def contact():
     return render_template("contact.html")
 
-@app.route('/register',methods=["GET","POST"])
+class RegisterForm(Form):
+    name = StringField('Name', [validators.Length(min=1, max=50)])
+    username = StringField('Username', [validators.Length(min=4, max=25)])
+    email = StringField('Email', [validators.Length(min=6, max=50)])
+    password = PasswordField('Password', [
+        validators.DataRequired(),
+        validators.EqualTo('confirm', message='Passwords do not match')
+    ])
+    confirm = PasswordField('Confirm Password')
+
+# User Register
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template("register.html")
-    form= request.form
-    if request.method == "POST":
-        sname = form['name']
-        scode=form['scode']
-        semail = form['semail']
-        password = form['password']
-        district= form['district']
-        dcoord=form['dcoord']
-        ph=form['phone']
-        princi=form['princi']
-        schooltotalstud=form['schooltotalstud']
-        numberstudentsmdm=form['numberstudentsmdm']
-        rpassword= form['rpassword']
-        c, conn = connection()
+    form = RegisterForm(request.form)
+    if request.method == 'POST' and form.validate():
+        name = form.name.data
+        email = form.email.data
+        username = form.username.data
+        password = form.password.data
 
-        x = c.execute("SELECT * FROM registers WHERE scode = %s",scode)
+        # Create cursor
+        cur = mysql.connection.cursor()
 
-        if int(x) > 0:
-            return "This school code is already taken, please login into your account"
-            #return render_template("register.html")
+        # Execute query
+        cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
 
-        else:
-            c.execute("INSERT INTO registers(scode, sname, semail, password,district, dcoord, ph, princi, schooltotalstud, numberstudentsmdm, rpassword) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(scode, sname, semail, password, district, dcoord, ph, princi, schooltotalstud, numberstudentsmdm, rpassword))
+        # Commit to DB
+        mysql.connection.commit()
 
-            conn.commit()
-            return render_template("main.html")
-            c.close()
-            conn.close()
-            gc.collect()
+        # Close connection
+        cur.close()
 
-            session['logged_in'] = True
-            session['scode'] = scode
-            session['sname'] = sname
-            session['semail'] =semail
-            session['password']=password
-            session['district']=ph
-            session['princi']=princi
-            session['schooltotalstud']=schooltotalstud
-            session['numberstudentsmdm']=numberstudentsmdm
+        flash('You are now registered and can log in', 'success')
 
-            return "success"
-            #return render_template("register.html")
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
 
-    #return render_template("register.html")
-@app.route('/login',methods=["GET","POST"])
+
+ #User login
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    msg=''
-    return render_template("logout.html")
     if request.method == 'POST':
-        form=request.form
-        scode = form['scode']
-        password = form['password']
-        sname = form['sname']
-        semail = form['semail']
-        password = form['password']
-        district= form['district']
-        dcoord=form['dcoord']
-        ph=form['phone']
-        princi=form['princi']
-        schooltotalstud=form['schooltotalstud']
-        numberstudentsmdm=form['numberstudentsmdm']
-        curl = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        #cur.execute("INSERT INTO register(email,password) VALUES(%s, %s)",(email,email))
-        curl.execute("SELECT * FROM registers WHERE scode=%s AND password=%s",(scode,password))
-        user = curl.fetchone()
-        curl.close()
-        if user:
-            return render_template('logout.html')
-            session['loggedin'] = True
-            session['scode'] = user['scode']
-            session['password'] = user['password']
-            session['scode'] = scode
-            session['sname'] = sname
-            session['semail'] =semail
-            session['password']=password
-            session['district']=ph
-            session['princi']=princi
-            session['schooltotalstud']=schooltotalstud
-            session['numberstudentsmdm']=numberstudentsmdm
+        # Get Form Fields
+        username = request.form['username']
+        passwordd = request.form['password']
+
+        # Create cursor
+        cursor = mysql.connection.cursor()
+
+        # Get user by username
+        result = cursor.execute("SELECT * FROM users WHERE username = %s", username)
+        if result > 0:
+            data = cursor.fetchone()
+            password = data[3]
+
+            # Compare Passwords
+            if passwordd== password:
+                # Passed
+                session['logged_in'] = True
+                session['username'] = username
+
+                flash('You are now logged in', 'success')
+                return redirect(url_for('dashboard'))
+            else:
+                error = 'Invalid login'
+                return render_template('login.html', error=error)
+            # Close connection
+            cur.close()
         else:
+            error = 'Username not found'
+            return render_template('login.html', error=error)
 
-            return render_template('main.html')
-    return render_template('main.html')
+    return render_template('login.html')
 
+# Check if user logged in
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('login'))
+    return wrap
 
-
+# Logout
+@app.route('/logout')
+@is_logged_in
+def logout():
+    session.clear()
+    flash('You are now logged out', 'success')
+    return redirect(url_for('login'))
 
 if __name__== '__main__':
     app.secret_key = "^A%DJAJU^JJ1231"
