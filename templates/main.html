@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html >
+<head>
+<title>main</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="register.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+   * {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.0s;
+  animation-name: fade;
+  animation-duration: 1.0s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+</style>
+</head>
+<body>
+<div class="w3-container" style="padding:100px; padding-top: 50px; background-color: white">
+    
+    
+      <div style="background-color: khaki;">
+     <div class="w3-hide-small menu " height=200px width=100%>
+               <img src="logo.png"  width=100% height=200px>
+    </div>
+    
+<div class="topnav">
+  <a class="active" href="main.html">Home</a>
+  <a href="foodinfo.html">Food Info</a>
+   <a href="foodmenu.html">Food Menu</a>
+  <a href="contact.html">Contact</a>
+    <a href="register.html">Register</a>
+  <div class="login-container">
+    <form action="/action_page.php">
+        <input type="text" placeholder="Username"  name="username">
+        <input type="password" placeholder="Password" name="psw">
+     <button type="submit">Login</button>
+      
+      </form>
+</div>
+  </div>
+          <!--Image slider-->
+              <div style="background-color: khaki" class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="mdm3.jpg"  width=114.9% height=400px>
+ 
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <div >
+      
+      
+        <img src="mdm2.jfif" width=114.9% height=400px ></div>
+  
+</div>
+<div class="mySlides fade">
+  <div class="numbertext">3/ 3</div>
+  <img src="mdm1.jfif" width=114.9% height=400px>
+  
+</div>
+
+
+
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" style="margin-right: -285px" onclick="plusSlides(1)">&#10095;</a>
+
+</div>
+          <br>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span> 
+  <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+ 
+</div>
+                <div class="modal-content container" style="background-color: khaki;margin: 0px;width: 1150px;display:inline-flex;border-radius: 0px;">
+          <div class="modal-content container" style="background-color: khaki;display:grid;width: 200px;padding-left: 50px;margin-top: 0px;margin-bottom: 0px;">
+         
+  <a  href="#about">About</a>
+    <a href="#objective">Objective</a>
+  
+             
+            </div>
+          <div class="modal-content container" style="background-color: khaki;width: 900px;margin-top: 0px;margin-bottom: 0px;text-align: justify;padding-top: 10px">
+             
+          <h3 id="about" style="margin-top: 0px; font-size: 43px;line-height: 70px;">About </h3>
+          <p style="text-align:justify;">Mid Day Meal in schools has had a long history in India. In 1925, a Mid Day Meal Programme was introduced for disadvantaged children in Madras Municipal Corporation. By the mid 1980s three States viz. Gujarat, Kerala and Tamil Nadu and the UT of Pondicherry had universalized a cooked Mid Day Meal Programme with their own resources for children studying at the primary stage by 1990-91 the number of States implementing the mid day meal programme with their own resources on a universal or a large scale had increased to twelve states.</p>
+    
+        <div style="padding-left: 30px;padding-top: 20px; text-align:justify;">
+            <ol type="1">
+            
+                <li><p>With a view to enhancing enrollment, retention and attendance and simultaneously improving nutritional levels among children, the National Programme of Nutritional Support to Primary Education (NP-NSPE) was launched as a Centrally Sponsored Scheme on 15th August 1995, initially in 2408 blocks in the country. By the year 1997-98 the NP-NSPE was introduced in all blocks of the country. It was further extended in 2002 to cover not only children in classes I -V of Government, Government aided and local body schools, but also children studying in EGS and AIE centres. Central Assistance under the scheme consisted of free supply of food grains @ 100 grams per child per school day, and subsidy for transportation of food grains up to a maximum of Rs 50 per quintal.</p>
+                  
+                </li>
+              <li><p>
+                  In September 2004 the scheme was revised to provide cooked mid day meal with 300 calories and 8-12 grams of protein to all children studying in classes I – V in Government and aided schools and EGS/ AIE centres. In addition to free supply of food grains, the revised scheme provided Central Assistance for (a) Cooking cost @ Re 1 per child per school day, (b) Transport subsidy was raised from the earlier maximum of Rs 50 per quintal to Rs. 100 per quintal for special category states, and Rs 75 per quintal for other states, (c) Management, monitoring and evaluation costs @ 2% of the cost of foodgrains, transport subsidy and cooking assistance, (d) Provision of mid day meal during summer vacation in drought affected areas.</p>
+                  
+              </li>
+                <li><p> In July 2006 the scheme was further revised to provide assistance for cooking cost at the rate of (a) Rs 1.80 per child/school day for States in the North Eastern Region, provided the NER States contribute Rs 0.20 per child/school day, and (b) Rs 1.50 per child/ school day for other States and UTs, provided that these States and UTs contribute Rs 0.50 per child/school day.</p>
+                   
+                </li>
+            <li><p>
+                In October 2007, the scheme has been further revised to cover children in upper primary (classes VI to VIII) initially in 3479 Educationally Backwards Blocks (EBBs). Around 1.7 crore upper primary children were included by this expansion of the scheme. From 2008-09 i.e w.e.f 1st April, 2008, the programme covers all children studying in Government, Local Body and Government-aided primary and upper primary schools and the EGS/AIE centres including Madarsa and Maqtabs supported under SSA of all areas across the country. The calorific value of a mid-day meal at upper primary stage has been fixed at a minimum of 700 calories and 20 grams of protein by providing 150 grams of food grains (rice/wheat) per child/school day.</p>
+                    
+                </li>
+            
+          </ol>
+                
+          </div>
+    
+              <!--objective-->
+              <h3 id="objective" style="margin-top: 0px; font-size: 43px;line-height: 70px;">Objectives </h3>
+          <p style="text-align:justify;">The objectives of the mid day meal scheme are:</p>
+              <div style="padding-left: 30px;padding-top: 20px; text-align:justify;">
+                 <ol type="1">
+            
+                <li><p> Improving the nutritional status of children in classes I – VIII in Government, Local Body and Government aided schools, and EGS and AIE centres</p>
+                  
+                </li>
+              <li><p>
+                  Encouraging poor children, belonging to disadvantaged sections, to attend school more regularly and help them concentrate on classroom activities.</p>
+                  
+              </li>
+                <li><p>Providing nutritional support to children of primary stage in drought-affected areas</p>
+                   
+                </li>
+            
+            
+          </ol>
+              </div>
+    </div>
+            
+          
+          </div> 
+          
+           <div class="w3-black w3-center w3-padding-24">Powered by Team AKASH</div>
+    </div>
+    
+    
+    
+    </div>
+    <script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
+    </body>
+</html>
