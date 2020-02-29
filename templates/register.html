@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html >
+<head>
+<title>register</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='home.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='register.css') }}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+</style>
+</head>
+<body>
+<div class="w3-container" style="padding:100px; padding-top: 50px; background-color: skyblue">
+
+
+      <div style="background-color: khaki;">
+     <div class="w3-hide-small menu " height=200px width=100%>
+               <img src="{{ url_for('static',filename='logo.png') }}"  width=100% height=200px>
+    </div>
+
+    <div class="topnav">
+      <a  href="/main">Home</a>
+      <a  href="/foodinfo">Food Info</a>
+       <a href="/foodmenu">Food Menu</a>
+      <a href="/contact">Contact</a>
+        <a  class="active" href="/register">Register</a>
+      <div class="login-container">
+        <form action="/register", method="POST">
+          <input type="text" placeholder="School Code"  name="scode">
+          <input type="password" placeholder="Password" name="password">
+         <button type="submit">Login</button>
+
+          </form>
+    </div>
+      </div>
+
+  <div class="modal-content container" style="background-color: khaki;margin: 0px;width: 1150px;">
+
+           <!-- /*registeration code*-->
+        <form class="modal-content "  style="border: 2px solid white;" action="/register">
+  <div class="container nav">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+       <label for="name"><b>School Name</b></label>
+    <input type="text" placeholder="Enter School Name" name="sname" required>
+
+       <label for="code"><b>School Code</b></label>
+    <input type="text" placeholder="Enter School Code" name="scode" required>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="semail" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="rpassword" required>
+
+    <label for="code"><b>District</b></label>
+    <input type="text" placeholder="Enter District" name="district" required>
+
+    <label for="code"><b>District Coordinator</b></label>
+    <input type="text" placeholder="Enter District Coordinator" name="district" required>
+
+      <label for="code"><b>Phone No of district coordinator</b></label>
+    <input type="text" placeholder="Enter Phone No of district coordinator" name="dcoord" required>
+
+      <label for="code"><b>Principal's Name</b></label>
+    <input type="text" placeholder="Enter Principal's Name" name="princi" required>
+
+    <label for="code"><b>Total Students</b></label>
+    <input type="text" placeholder="Enter Total Students" name="schooltotalstud" required>
+
+
+    <label for="code"><b>Number of students taking Mid Day Meal</b></label>
+    <input type="text" placeholder="Enter Number of students taking Mid Day Meal" name="numberstudentsmdm" required>
+    <hr>
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+    <button type="submit" class="btnstyle registerbtn">Register</button>
+  </div>
+
+  <div class="container signin">
+    <p>Already have an account? <a href="main.html">Login</a>.</p>
+  </div>
+</form>
+
+          </div>
+
+
+
+     <div class="w3-black w3-center w3-padding-24">Powered by Team AKASH</div>
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
